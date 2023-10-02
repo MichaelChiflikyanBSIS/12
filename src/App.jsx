@@ -4,7 +4,6 @@ import './App.css';
 function App() {
   const [newItem, setNewItem] = useState("");
   const [todos, setTodos] = useState([]);
-  const [count, setCount] = useState(0);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -39,9 +38,6 @@ function App() {
   return (
     <div className="container">
       <div className="centered-content">
-        <a href="https://react.dev" target="_blank">
-
-        </a>
         <h1 className="header">ToDo List</h1>
         <div className="card">
           <form onSubmit={handleSubmit} className="new-item-form">
@@ -56,29 +52,39 @@ function App() {
             </div>
             <button className="btn">Add</button>
           </form>
-          <ul className="list">
-            {todos.map((todo) => (
-              <li key={todo.id}>
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={todo.completed}
-                    onChange={(e) => toggleTodo(todo.id, e.target.checked)}
-                  />
-                  {todo.title}
-                </label>
-                <button
-                  onClick={() => deleteTodo(todo.id)}
-                  className="btn btn-danger"
-                >
-                  Delete
-                </button>
-              </li>
-            ))}
-          </ul>
+          <table className="table" style={{ border: "1px solid #000" }}>
+            <thead>
+              <tr>
+                <th>Task</th>
+              </tr>
+            </thead>
+            <tbody>
+              {todos.map((todo) => (
+                <tr key={todo.id}>
+                  <td>
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={todo.completed}
+                        onChange={(e) => toggleTodo(todo.id, e.target.checked)}
+                      />
+                      {todo.title}
+                    </label>
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => deleteTodo(todo.id)}
+                      className="btn btn-danger"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
-
     </div>
   );
 }
